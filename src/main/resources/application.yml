@@ -1,0 +1,46 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ms-producto
+
+  datasource:
+    url: ${DB_URL:jdbc:oracle:thin:@y9yihlwya0utl6x4_medium?TNS_ADMIN=/Users/danielguzman/Desktop/Hospital_VM/Wallet_Y9YIHLWYA0UTL6X4}
+    username: ${DB_USERNAME:ADMIN}
+    password: ${DB_PASSWORD:FullStack-001}
+    driver-class-name: oracle.jdbc.OracleDriver
+
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  cloud:
+    compatibility-verifier:
+      enabled: false
+
+# PROPIEDADES DE SWAGGER
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+
+# EUREKA
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
